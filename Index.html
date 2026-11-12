@@ -1,248 +1,63 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<!DOCTYPE html><html lang="fa">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>بازار افغان | آگهی‌های رایگان افغانستان</title>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>وطندار - نسخه کامل</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-:root{--bg:#f4f1ec;--sf:#fff;--tx:#1e2321;--mu:#68716d;--ln:#e0dcd4;--ac:#0b7a4b;--acx:#fff;--rd:#b8321f;--gd:#c99a2e;--sh:#eef3ee;
-box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141816;--sf:#1d2320;--tx:#e8ece9;--mu:#99a39e;--ln:#2e3733;--ac:#3fbf86;--acx:#06241a;--rd:#ff8a76;--sh:#232b27;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#141816;--sf:#1d2320;--tx:#e8ece9;--mu:#99a39e;--ln:#2e3733;--ac:#3fbf86;--acx:#06241a;--rd:#ff8a76;--sh:#232b27;color-scheme:dark}
-*{box-sizing:border-box}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);color:var(--tx);font:400 15px/1.7 Vazirmatn,Tahoma,sans-serif}
-button,input,textarea,select{font:inherit;color:inherit}
-button{cursor:pointer;border:0;background:none}
-:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
-.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--sf);border-bottom:1px solid var(--ln)}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--sf);z-index:6}
-.bar{max-width:1120px;margin:0 auto;padding:10px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.logo{font-weight:800;font-size:21px;color:var(--ac);white-space:nowrap}
-.logo i{font-style:normal;color:var(--gd)}
-.sr{flex:1 1 240px;display:flex;gap:0;border:1.5px solid var(--ln);border-radius:12px;overflow:hidden;background:var(--bg)}
-.sr input{flex:1;border:0;background:none;padding:8px 12px;outline:0;min-width:0}
-.sr select{border:0;border-inline-start:1px solid var(--ln);background:none;padding:0 8px}
-.btn{padding:8px 16px;border-radius:12px;border:1.5px solid var(--ln);background:var(--sf);white-space:nowrap}
-.btn.p{background:var(--ac);color:var(--acx);border-color:var(--ac);font-weight:700}
-.btn.d{color:var(--rd)}
-.ib{position:relative;width:40px;height:40px;border-radius:12px;border:1.5px solid var(--ln);font-size:17px}
-.ib em{position:absolute;top:-5px;inset-inline-start:-5px;background:var(--rd);color:#fff;font-style:normal;font-size:11px;min-width:18px;height:18px;border-radius:9px;display:grid;place-items:center}
-.cats{max-width:1120px;margin:0 auto;padding:0 14px 10px;display:flex;gap:8px;overflow-x:auto}
-.cat{flex:none;padding:5px 14px;border-radius:99px;border:1px solid var(--ln);background:var(--bg);color:var(--mu);font-size:14px}
-.cat.on{background:var(--ac);color:var(--acx);border-color:var(--ac)}
-main{max-width:1120px;margin:0 auto;padding:14px 14px 80px}
-.fl{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
-.fl input,.fl select{background:var(--sf);border:1px solid var(--ln);border-radius:10px;padding:6px 10px;width:130px}
-.fl select{width:auto}
-.cnt{color:var(--mu);margin-inline-start:auto;font-size:14px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
-.ad{background:var(--sf);border:1px solid var(--ln);border-radius:14px;overflow:hidden;text-align:start;display:block;width:100%}
-.ph{aspect-ratio:4/3;display:grid;place-items:center;font-size:54px;background:var(--sh);background-size:cover;background-position:center;position:relative}
-.ph s{position:absolute;top:8px;inset-inline-end:8px;background:var(--gd);color:#fff;text-decoration:none;font-size:11px;padding:1px 8px;border-radius:8px}
-.ad .b{padding:10px 12px}
-.ad h3{margin:0;font-size:15px;font-weight:500;line-height:1.5;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-.pr{color:var(--ac);font-weight:700;margin-top:2px}
-.mt{color:var(--mu);font-size:12.5px}
-.empty{text-align:center;color:var(--mu);padding:60px 0}
-dialog{border:0;padding:0;width:min(720px,100% - 20px);max-height:calc(100% - 20px);border-radius:18px;background:var(--sf);color:var(--tx)}
-dialog::backdrop{background:rgba(0,0,0,.5)}
-.dh{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--ln);position:sticky;top:0;background:var(--sf);z-index:2}
-.dh h2{margin:0;font-size:17px}
-.db{padding:16px}
-.big{aspect-ratio:16/10;border-radius:14px;display:grid;place-items:center;font-size:96px;background:var(--sh);background-size:cover;background-position:center}
-.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.row>*{flex:1 1 140px}
-.fm{display:grid;gap:12px}
-.fm label{display:flex;flex-direction:column;gap:3px;font-size:14px;color:var(--mu)}
-.fm input,.fm select,.fm textarea{background:var(--bg);border:1px solid var(--ln);border-radius:10px;padding:8px 10px;color:var(--tx)}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.tag{display:inline-block;background:var(--sh);border-radius:8px;padding:0 10px;font-size:13px;margin-inline-end:6px}
-.th{display:flex;gap:10px;align-items:center;padding:10px;border-radius:12px;border:1px solid var(--ln);margin-bottom:8px;width:100%;text-align:start}
-.th .e{width:44px;height:44px;border-radius:10px;background:var(--sh);display:grid;place-items:center;font-size:24px;flex:none}
-.msgs{display:flex;flex-direction:column;gap:6px;height:min(55vh,420px);overflow-y:auto;padding:4px;background:var(--bg);border-radius:12px;margin:10px 0}
-.m{max-width:78%;padding:6px 12px;border-radius:14px;background:var(--sf);border:1px solid var(--ln);align-self:flex-start}
-.m.me{align-self:flex-end;background:var(--ac);color:var(--acx);border-color:var(--ac)}
-.m small{display:block;opacity:.65;font-size:11px}
-.cb{display:flex;gap:8px}.cb input{flex:1;background:var(--bg);border:1px solid var(--ln);border-radius:12px;padding:8px 12px}
-.g{display:flex;gap:10px;align-items:center;justify-content:center;width:100%;padding:11px;border:1.5px solid var(--ln);border-radius:12px;background:var(--sf);font-weight:500}
-.note{background:var(--sh);border-radius:10px;padding:8px 12px;font-size:13px;color:var(--mu)}
-#toast{position:fixed;inset-inline:0;bottom:calc(24px + env(safe-area-inset-bottom,0px));text-align:center;pointer-events:none;opacity:0;transition:opacity .2s;z-index:50}
-#toast.s{opacity:1}#toast span{background:var(--tx);color:var(--bg);padding:6px 16px;border-radius:99px;font-size:14px}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+body { font-family: 'Tahoma', sans-serif; background-color: #f0f2f5; margin-bottom: 80px; }
+.hero { position: relative; text-align: center; color: white; }
+.hero img { width: 100%; height: 300px; object-fit: cover; border-radius: 10px; }
+.hero-title { position: fixed; top: 10px; left: 50%; transform: translateX(-50%); font-size: 24px; color: #fff; background-color: rgba(0,109,119,0.85); padding: 8px 20px; border-radius: 15px; z-index: 1000; font-weight: bold; }
+.section-buttons { display: flex; justify-content: space-around; flex-wrap: wrap; margin: 20px 0; }
+.button-card { width: 120px; margin: 10px; text-align: center; padding: 15px; border-radius: 15px; background-color: #fff; box-shadow: 0 5px 12px rgba(0,0,0,0.2); cursor: pointer; transition: transform 0.3s, background-color 0.3s; }
+.button-card:hover { transform: translateY(-6px); background-color: #ade8f4; }
+.button-card i { font-size: 28px; margin-bottom: 10px; color: #006d77; }
+.button-card span { display: block; font-size: 14px; font-weight: 600; color: #333; }
+.telegram-bar { background-color: #0088cc; color: white; padding: 22px; text-align: center; border-radius: 15px; margin: 20px 0; font-size: 18px; font-weight: bold; }
+#chatbot { position: fixed; bottom: 100px; left: 20px; width: 260px; background-color: #fff; border-radius: 15px; box-shadow: 0 6px 15px rgba(0,0,0,0.3); padding: 18px; display: none; z-index: 1000; font-weight: 500; }
+#chatbot p { margin: 0; font-size: 14px; color: #333; }
+#chatbot .close-btn { position: absolute; top: 5px; right: 10px; cursor: pointer; color: #333; font-size: 16px; }
+#bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background-color: #006d77; display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; border-top-left-radius: 15px; border-top-right-radius: 15px; box-shadow: 0 -2px 10px rgba(0,0,0,0.3); }
+#bottom-nav .nav-item { text-align: center; color: #fff; cursor: pointer; transition: color 0.3s; }
+#bottom-nav .nav-item i { display: block; font-size: 22px; margin-bottom: 4px; }
+#bottom-nav .nav-item span { font-size: 14px; font-weight: 600; }
+#bottom-nav .nav-item:hover { color: #ade8f4; }
 </style>
 </head>
-<body>
-<header class="top">
-<div class="bar">
-<div class="logo">بازار<i>افغان</i></div>
-<div class="sr"><input id="q" type="search" placeholder="جستجو: موتر، خانه، موبایل…"><select id="city" aria-label="شهر"></select></div>
-<button class="ib" id="bFav" aria-label="نشان‌شده‌ها">♡</button>
-<button class="ib" id="bChat" aria-label="گفتگوها">💬</button>
-<button class="btn" id="bUser">ورود</button>
-<button class="btn p" id="bPost">+ ثبت آگهی</button>
-</div>
-<nav class="cats" id="cats"></nav>
-</header>
-<main>
-<div class="fl">
-<input id="pmin" type="number" min="0" placeholder="از قیمت">
-<input id="pmax" type="number" min="0" placeholder="تا قیمت">
-<select id="sort"><option value="new">تازه‌ترین</option><option value="lo">ارزان‌ترین</option><option value="hi">گران‌ترین</option></select>
-<span class="cnt" id="cnt"></span>
-</div>
-<div class="grid" id="grid"></div>
-<div class="empty" id="empty" hidden>آگهی‌ای با این فیلترها پیدا نشد.</div>
-</main>
-<dialog id="dlg"><div id="dc"></div></dialog>
-<div id="toast"><span></span></div>
-
-<script>
-var CITIES=["کابل","هرات","مزار شریف","قندهار","جلال‌آباد","کندز","غزنی","بامیان","خوست","پل خمری"];
-var CATS=[["املاک","🏠"],["وسایل نقلیه","🚗"],["دیجیتال","📱"],["لوازم خانه","🛋️"],["خدمات","🛠️"],["کار و استخدام","💼"],["پوشاک","👕"],["سرگرمی","🎮"]];
-var $=function(i){return document.getElementById(i)};
-var K="bazar-af-v1",S={user:null,ads:[],favs:[],chats:[]},cat="",day=864e5,now=Date.now();
-function ic(c){for(var i=0;i<CATS.length;i++)if(CATS[i][0]===c)return CATS[i][1];return"📦"}
-function load(){try{var d=JSON.parse(localStorage.getItem(K));if(d&&d.ads)S=d}catch(e){}}
-function save(){try{localStorage.setItem(K,JSON.stringify(S))}catch(e){toast("حافظه پر است؛ ذخیره نشد")}}
-function seed(){
-var a=[["تویوتا کرولا ۲۰۱۴ اتوماتیک","وسایل نقلیه","کابل",1250000,"موتر خیلی پاک، بدون تصادف، سند کامل. مایل‌ها ۸۵ هزار."],
-["آپارتمان ۳ خوابه در شهرنو","املاک","کابل",0,"طبقه دوم، ۱۲۰ متر، برق ۲۴ ساعته و آب چاه. قیمت توافقی."],
-["آیفون ۱۳ پرو ۱۲۸ گیگ","دیجیتال","هرات",68000,"سالم، با جعبه و شارژر اصلی. باتری ۹۱٪."],
-["لپ‌تاپ لنوو ThinkPad i5","دیجیتال","مزار شریف",42000,"رم ۱۶، SSD ۵۱۲، بسیار تمیز."],
-["سیت کامل مبل ۷ نفره","لوازم خانه","قندهار",35000,"یک سال استفاده، رنگ قهوه‌ای."],
-["نیازمند معلم انگلیسی","کار و استخدام","جلال‌آباد",15000,"معاش ماهانه، ۴ ساعت در روز، مرکز آموزشی."],
-["نصب و ترمیم سولر","خدمات","کابل",0,"نصب پنل و باتری، ضمانت یک ساله."],
-["پیراهن و تنبان مردانه","پوشاک","کندز",1800,"سایز L، جنس خوب، نو."],
-["پلی‌استیشن ۴ با دو دسته","سرگرمی","هرات",24000,"۱۰ بازی همراه، سالم."],
-["زمین ۲۰۰ متر در بامیان","املاک","بامیان",900000,"سند شرعی، نزدیک جاده اصلی."]];
-S.ads=a.map(function(x,i){return{id:"s"+i,t:x[0],c:x[1],ct:x[2],p:x[3],d:x[4],ph:"",img:"",own:"seed",ow:["احمد","فاطمه","نجیب","مریم","یوسف"][i%5],ts:now-i*day*0.7,v:i%4===0}});
-}
-load();if(!S.ads.length){seed();save()}
-function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
-function money(n){return n?Number(n).toLocaleString("fa-IR")+" افغانی":"توافقی"}
-function ago(t){var d=Math.floor((Date.now()-t)/day);return d<1?"امروز":d===1?"دیروز":d+" روز پیش"}
-function toast(m){var t=$("toast");t.firstChild.textContent=m;t.className="s";setTimeout(function(){t.className=""},1800)}
-function find(id){return S.ads.filter(function(a){return a.id===id})[0]}
-function pic(a){return a.img?'style="background-image:url('+a.img+')"':""}
-
-function list(){
-var q=$("q").value.trim().toLowerCase(),city=$("city").value,mn=+$("pmin").value||0,mx=+$("pmax").value||0,so=$("sort").value;
-var l=S.ads.filter(function(a){
-if(cat&&a.c!==cat)return false;
-if(city&&a.ct!==city)return false;
-if(mn&&a.p<mn)return false;
-if(mx&&a.p>mx)return false;
-return !q||(a.t+" "+a.d+" "+a.c).toLowerCase().indexOf(q)>-1});
-l.sort(function(a,b){return so==="lo"?a.p-b.p:so==="hi"?b.p-a.p:b.ts-a.ts});
-$("grid").innerHTML=l.map(function(a){
-return '<button class="ad" data-id="'+a.id+'"><div class="ph" '+pic(a)+'>'+(a.img?"":ic(a.c))+(a.v?'<s>تأیید‌شده</s>':'')+'</div><div class="b"><h3>'+esc(a.t)+'</h3><div class="pr">'+money(a.p)+'</div><div class="mt">'+esc(a.ct)+' · '+ago(a.ts)+'</div></div></button>'}).join("");
-$("empty").hidden=l.length>0;$("cnt").textContent=l.length.toLocaleString("fa-IR")+" آگهی";
-}
-function head(){
-$("bUser").textContent=S.user?"👤 "+S.user.name.split(" ")[0]:"ورود";
-$("bFav").innerHTML="♡"+(S.favs.length?"<em>"+S.favs.length.toLocaleString("fa-IR")+"</em>":"");
-$("bChat").innerHTML="💬"+(S.chats.length?"<em>"+S.chats.length.toLocaleString("fa-IR")+"</em>":"");
-}
-function cats(){
-$("cats").innerHTML='<button class="cat'+(cat?'':' on')+'" data-c="">همه</button>'+CATS.map(function(c){return '<button class="cat'+(cat===c[0]?' on':'')+'" data-c="'+c[0]+'">'+c[1]+" "+c[0]+'</button>'}).join("");
-}
-function show(title,html){
-$("dc").innerHTML='<div class="dh"><h2>'+title+'</h2><button class="ib" data-a="close" aria-label="بستن">✕</button></div><div class="db">'+html+'</div>';
-if(!$("dlg").open)$("dlg").showModal();
-}
-function need(fn){if(S.user)return fn();pending=fn;login()}
-var pending=null,curChat=null,timers=[];
-
-function login(){
-show("ورود به حساب",'<div class="fm"><button class="g" data-a="google"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9 3.5l6.7-6.7C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.8 6.1C12.3 13.5 17.6 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"/><path fill="#FBBC05" d="M10.4 28.7A14.5 14.5 0 0 1 9.5 24c0-1.6.3-3.2.8-4.7l-7.8-6.1A24 24 0 0 0 0 24c0 3.9.9 7.5 2.6 10.8l7.8-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 12-2.1 16-5.8l-7.5-5.8c-2.1 1.4-4.8 2.3-8.5 2.3-6.4 0-11.7-4-13.6-9.8l-7.8 6.1C6.5 42.6 14.6 48 24 48z"/></svg>ادامه با Google</button>'
-+'<div class="note">این نسخه نمایشی است: ورود واقعی با Google به Client ID و سرور نیاز دارد. این‌جا فقط نام و ایمیل خود را وارد کنید تا جریان ثبت‌نام را امتحان کنید.</div>'
-+'<label>نام<input id="lnm" placeholder="مثلاً حمید احمدی"></label><label>ایمیل Google<input id="lem" type="email" dir="ltr" placeholder="name@gmail.com"></label></div>');
-}
-function detail(id){
-var a=find(id);if(!a)return;
-var fav=S.favs.indexOf(id)>-1,mine=a.own==="me";
-show(esc(a.t),'<div class="big" '+pic(a)+'>'+(a.img?"":ic(a.c))+'</div><h3 class="pr" style="font-size:22px;margin:12px 0 4px">'+money(a.p)+'</h3><div><span class="tag">'+esc(a.c)+'</span><span class="tag">'+esc(a.ct)+'</span><span class="tag">'+ago(a.ts)+'</span></div><p style="white-space:pre-wrap">'+esc(a.d)+'</p><div class="mt">آگهی‌دهنده: '+esc(a.ow)+(a.v?' ✓ تأیید‌شده':'')+'</div>'
-+'<div class="row"><button class="btn p" data-a="chat" data-id="'+id+'">'+(mine?"گفتگوها":"💬 چت با فروشنده")+'</button><button class="btn" data-a="fav" data-id="'+id+'">'+(fav?"♥ نشان‌شده":"♡ نشان کردن")+'</button><button class="btn" data-a="share" data-id="'+id+'">اشتراک</button>'+(mine?'<button class="btn d" data-a="del" data-id="'+id+'">حذف آگهی</button>':'<button class="btn d" data-a="report" data-id="'+id+'">گزارش</button>')+'</div>'
-+'<div class="note" style="margin-top:12px">نکته ایمنی: پیش از دیدن کالا پول نفرستید و در جای عمومی قرار بگذارید.</div>');
-}
-function post(){
-show("ثبت آگهی جدید",'<div class="fm"><label>عنوان<input id="pt" maxlength="80"></label><div class="two"><label>دسته<select id="pc">'+CATS.map(function(c){return"<option>"+c[0]+"</option>"}).join("")+'</select></label><label>شهر<select id="pci">'+CITIES.map(function(c){return"<option>"+c+"</option>"}).join("")+'</select></label></div><label>قیمت (افغانی؛ خالی = توافقی)<input id="pp" type="number" min="0"></label><label>توضیحات<textarea id="pd" rows="4"></textarea></label><label>عکس (اختیاری)<input id="pf" type="file" accept="image/*"></label><button class="btn p" data-a="pub">انتشار آگهی</button></div>');
-}
-function chatList(){
-var h=S.chats.map(function(c){var a=find(c.ad);if(!a)return"";var m=c.msgs[c.msgs.length-1];return '<button class="th" data-a="open" data-id="'+c.ad+'"><div class="e">'+ic(a.c)+'</div><div><b>'+esc(a.t)+'</b><div class="mt">'+esc(m?m.t:"")+'</div></div></button>'}).join("");
-show("گفتگوها",h||'<div class="empty">هنوز گفتگویی ندارید. از صفحه هر آگهی «چت با فروشنده» را بزنید.</div>');
-}
-function chat(id){
-var a=find(id),c=null;
-S.chats.forEach(function(x){if(x.ad===id)c=x});
-if(!c){c={ad:id,msgs:[]};S.chats.push(c);save();head()}
-curChat=id;
-var ms=c.msgs.map(function(m){return '<div class="m'+(m.me?' me':'')+'">'+esc(m.t)+'<small>'+new Date(m.ts).toLocaleTimeString("fa-IR",{hour:"2-digit",minute:"2-digit"})+'</small></div>'}).join("");
-show("چت با "+esc(a.ow),'<div class="mt">'+esc(a.t)+' · '+money(a.p)+'</div><div class="msgs" id="ms">'+(ms||'<div class="empty" style="padding:20px">سلام کنید!</div>')+'</div><div class="cb"><input id="ci" placeholder="پیام…" maxlength="400"><button class="btn p" data-a="send">ارسال</button></div><div class="mt" style="margin-top:8px">در نسخه نمایشی، فروشنده پاسخ خودکار می‌دهد.</div>');
-var m=$("ms");m.scrollTop=m.scrollHeight;$("ci").focus();
-}
-function send(){
-var i=$("ci"),t=i.value.trim();if(!t||curChat==null)return;
-var id=curChat,c=S.chats.filter(function(x){return x.ad===id})[0];
-c.msgs.push({me:1,t:t,ts:Date.now()});save();chat(id);
-var R=["سلام، بله موجود است.","قیمت کمی قابل مذاکره است.","می‌توانید فردا ببینید؟","شماره تماس را بفرستید.","ممنون از پیام شما."];
-timers.push(setTimeout(function(){c.msgs.push({me:0,t:R[Math.floor(Math.random()*R.length)],ts:Date.now()});save();if($("dlg").open&&curChat===id)chat(id)},1200));
-}
-function mine(){
-var l=S.ads.filter(function(a){return a.own==="me"});
-show("آگهی‌های من",l.map(function(a){return '<button class="th" data-a="open" data-id="'+a.id+'"><div class="e" '+pic(a)+'>'+(a.img?"":ic(a.c))+'</div><div><b>'+esc(a.t)+'</b><div class="mt">'+money(a.p)+'</div></div></button>'}).join("")||'<div class="empty">آگهی‌ای ندارید.</div>');
-}
-function favs(){
-var l=S.ads.filter(function(a){return S.favs.indexOf(a.id)>-1});
-show("نشان‌شده‌ها",l.map(function(a){return '<button class="th" data-a="open" data-id="'+a.id+'"><div class="e">'+ic(a.c)+'</div><div><b>'+esc(a.t)+'</b><div class="mt">'+money(a.p)+'</div></div></button>'}).join("")||'<div class="empty">چیزی نشان نکرده‌اید.</div>');
-}
-function acct(){
-show("حساب من",'<p><b>'+esc(S.user.name)+'</b><br><span class="mt" dir="ltr">'+esc(S.user.email)+'</span></p><div class="row"><button class="btn" data-a="mine">آگهی‌های من</button><button class="btn" data-a="favs">نشان‌شده‌ها</button><button class="btn d" data-a="out">خروج</button></div>');
-}
-function pubAd(){
-var t=$("pt").value.trim(),d=$("pd").value.trim();
-if(t.length<4)return toast("عنوان را کامل‌تر بنویسید");
-var ad={id:"u"+Date.now(),t:t,c:$("pc").value,ct:$("pci").value,p:+$("pp").value||0,d:d||"—",img:"",own:"me",ow:S.user.name,ts:Date.now(),v:false};
-var f=$("pf").files[0];
-function fin(){S.ads.unshift(ad);save();$("dlg").close();list();toast("آگهی منتشر شد")}
-if(!f)return fin();
-var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var s=Math.min(1,640/im.width),c=document.createElement("canvas");c.width=im.width*s;c.height=im.height*s;c.getContext("2d").drawImage(im,0,0,c.width,c.height);ad.img=c.toDataURL("image/jpeg",.7);fin()};im.onerror=fin;im.src=r.result};r.onerror=fin;r.readAsDataURL(f);
-}
-$("dc").onclick=function(e){
-var b=e.target.closest("[data-a]");if(!b)return;
-var a=b.getAttribute("data-a"),id=b.getAttribute("data-id");
-if(a==="close")$("dlg").close();
-else if(a==="google"){
-var n=$("lnm").value.trim(),m=$("lem").value.trim();
-if(!n||m.indexOf("@")<1)return toast("نام و ایمیل معتبر وارد کنید");
-S.user={name:n,email:m};save();head();$("dlg").close();toast("خوش آمدید "+n);
-if(pending){var f=pending;pending=null;f()}}
-else if(a==="chat")need(function(){chat(id)});
-else if(a==="fav")need(function(){var i=S.favs.indexOf(id);i>-1?S.favs.splice(i,1):S.favs.push(id);save();head();detail(id)});
-else if(a==="share"){try{navigator.clipboard.writeText(find(id).t+" – "+location.href).then(function(){toast("پیوند کپی شد")})}catch(x){toast("کپی نشد")}}
-else if(a==="report")toast("گزارش شما ثبت شد؛ سپاس");
-else if(a==="del"){if(confirm("حذف شود؟")){S.ads=S.ads.filter(function(x){return x.id!==id});save();$("dlg").close();list()}}
-else if(a==="pub")pubAd();
-else if(a==="send")send();
-else if(a==="open")detail(id);
-else if(a==="mine")mine();
-else if(a==="favs")favs();
-else if(a==="out"){S.user=null;save();head();$("dlg").close();toast("خارج شدید")}
-};
-$("dc").onkeydown=function(e){if(e.key==="Enter"&&e.target.id==="ci")send()};
-$("dlg").onclick=function(e){if(e.target===this)this.close()};
-$("dlg").onclose=function(){curChat=null};
-$("grid").onclick=function(e){var b=e.target.closest(".ad");if(b)detail(b.getAttribute("data-id"))};
-$("cats").onclick=function(e){var b=e.target.closest("[data-c]");if(b){cat=b.getAttribute("data-c");cats();list()}};
-$("bUser").onclick=function(){S.user?acct():login()};
-$("bPost").onclick=function(){need(post)};
-$("bFav").onclick=function(){need(favs)};
-$("bChat").onclick=function(){need(chatList)};
-["q","pmin","pmax","sort","city"].forEach(function(i){$(i).addEventListener("input",list)});
-$("city").innerHTML='<option value="">همه شهرها</option>'+CITIES.map(function(c){return"<option>"+c+"</option>"}).join("");
-cats();head();list();
-</script>
-</body>
-</html>
+<body><section class="hero">
+  <img src="https://via.placeholder.com/1200x300.png?text=وطندار" alt="ویترین">
+  <div class="hero-title">AFG M</div>
+</section><div class="container section-buttons">
+  <div class="button-card" style="background-color:#ffadad"><i class="fa-solid fa-ticket"></i><span>نوبت کد فیدا</span></div>
+  <div class="button-card" style="background-color:#ffd6a5"><i class="fa-solid fa-phone"></i><span>ارتباط با AFGM</span></div>
+  <div class="button-card" style="background-color:#fdffb6"><i class="fa-solid fa-search"></i><span>پیگیری درخواست</span></div>
+  <div class="button-card" style="background-color:#caffbf"><i class="fa-solid fa-id-card"></i><span>ثبت‌نام تذکره الکترونیکی</span></div>
+  <div class="button-card" style="background-color:#9bf6ff"><i class="fa-solid fa-user-check"></i><span>تثبیت هویت</span></div>
+  <div class="button-card" style="background-color:#a0c4ff"><i class="fa-solid fa-passport"></i><span>تمدید پاسپورت</span></div>
+  <div class="button-card" style="background-color:#bdb2ff"><i class="fa-solid fa-file-check"></i><span>تأیید اسناد</span></div>
+  <div class="button-card" style="background-color:#ffc6ff"><i class="fa-solid fa-passport"></i><span>پاسپورت خانواری</span></div>
+  <div class="button-card" style="background-color:#ffadad"><i class="fa-solid fa-gavel"></i><span>وکالت نامه</span></div>
+  <div class="button-card" style="background-color:#ffd6a5"><i class="fa-solid fa-baby"></i><span>گواهی تولد</span></div>
+  <div class="button-card" style="background-color:#fdffb6"><i class="fa-solid fa-scroll"></i><span>نکاه خط</span></div>
+  <div class="button-card" style="background-color:#caffbf"><i class="fa-solid fa-passport"></i><span>پاسپورت الکترونیکی</span></div>
+  <div class="button-card" style="background-color:#9bf6ff"><i class="fa-solid fa-id-card"></i><span>تأیید تذکره</span></div>
+  <div class="button-card" style="background-color:#a0c4ff"><i class="fa-solid fa-file-lines"></i><span>مفقودی مدارک</span></div>
+  <div class="button-card" style="background-color:#bdb2ff"><i class="fa-solid fa-file-circle-xmark"></i><span>تذکره غیابی</span></div>
+  <div class="button-card" style="width:150px; background-color:#ffc6ff"><i class="fa-solid fa-building-columns"></i><span>افتتاح حساب</span></div>
+  <div class="button-card" style="width:150px; background-color:#ffadad"><i class="fa-solid fa-sim-card"></i><span>سیمکارت</span></div>
+  <div class="button-card" style="width:150px; background-color:#ffd6a5"><i class="fa-solid fa-shield-heart"></i><span>بیمه</span></div>
+  <div class="button-card" style="width:150px; background-color:#fdffb6"><i class="fa-solid fa-chalkboard-teacher"></i><span>آموزش فنی حرفه‌ای</span></div>
+  <div class="button-card" style="width:150px; background-color:#caffbf"><i class="fa-solid fa-file-signature"></i><span>ترجمه رسمی</span></div>
+  <div class="button-card" style="width:150px; background-color:#9bf6ff"><i class="fa-solid fa-passport"></i><span>اقامت و ویزا</span></div>
+  <div class="button-card" style="background-color:#ffc6ff"><i class="fa-solid fa-gift"></i><span>سوغات افغانستان</span></div>
+  <div class="button-card" style="background-color:#ffadad"><i class="fa-solid fa-calendar-days"></i><span>تاریخ افغانستان</span></div>
+</div><div class="container telegram-bar">کانال تلگرام AFGM</div><div id="chatbot">
+  <span class="close-btn" onclick="document.getElementById('chatbot').style.display='none'">&times;</span>
+  <p>خوش آمدید به AFGM!<br>اینجا تمام کارهای مهاجرین انجام می‌شود.</p>
+</div><div id="bottom-nav">
+  <div class="nav-item"><i class="fa-solid fa-house"></i><span>خانه</span></div>
+  <div class="nav-item"><i class="fa-solid fa-search"></i><span>پیگیری درخواست</span></div>
+  <div class="nav-item"><i class="fa-solid fa-user"></i><span>حساب من</span></div>
+</div><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></
