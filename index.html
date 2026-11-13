@@ -1,63 +1,313 @@
-<!DOCTYPE html><html lang="fa">
+<!DOCTYPE html>
+<html lang="fa">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>وطندار - نسخه کامل</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<style>
-body { font-family: 'Tahoma', sans-serif; background-color: #f0f2f5; margin-bottom: 80px; }
-.hero { position: relative; text-align: center; color: white; }
-.hero img { width: 100%; height: 300px; object-fit: cover; border-radius: 10px; }
-.hero-title { position: fixed; top: 10px; left: 50%; transform: translateX(-50%); font-size: 24px; color: #fff; background-color: rgba(0,109,119,0.85); padding: 8px 20px; border-radius: 15px; z-index: 1000; font-weight: bold; }
-.section-buttons { display: flex; justify-content: space-around; flex-wrap: wrap; margin: 20px 0; }
-.button-card { width: 120px; margin: 10px; text-align: center; padding: 15px; border-radius: 15px; background-color: #fff; box-shadow: 0 5px 12px rgba(0,0,0,0.2); cursor: pointer; transition: transform 0.3s, background-color 0.3s; }
-.button-card:hover { transform: translateY(-6px); background-color: #ade8f4; }
-.button-card i { font-size: 28px; margin-bottom: 10px; color: #006d77; }
-.button-card span { display: block; font-size: 14px; font-weight: 600; color: #333; }
-.telegram-bar { background-color: #0088cc; color: white; padding: 22px; text-align: center; border-radius: 15px; margin: 20px 0; font-size: 18px; font-weight: bold; }
-#chatbot { position: fixed; bottom: 100px; left: 20px; width: 260px; background-color: #fff; border-radius: 15px; box-shadow: 0 6px 15px rgba(0,0,0,0.3); padding: 18px; display: none; z-index: 1000; font-weight: 500; }
-#chatbot p { margin: 0; font-size: 14px; color: #333; }
-#chatbot .close-btn { position: absolute; top: 5px; right: 10px; cursor: pointer; color: #333; font-size: 16px; }
-#bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background-color: #006d77; display: flex; justify-content: space-around; padding: 12px 0; z-index: 1000; border-top-left-radius: 15px; border-top-right-radius: 15px; box-shadow: 0 -2px 10px rgba(0,0,0,0.3); }
-#bottom-nav .nav-item { text-align: center; color: #fff; cursor: pointer; transition: color 0.3s; }
-#bottom-nav .nav-item i { display: block; font-size: 22px; margin-bottom: 4px; }
-#bottom-nav .nav-item span { font-size: 14px; font-weight: 600; }
-#bottom-nav .nav-item:hover { color: #ade8f4; }
-</style>
+  <meta charset="UTF-8">
+  <title>دفترچه یادداشت من</title>
+  <style>
+    body {
+      font-family: Tahoma;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+      direction: rtl;
+    }
+    header {
+      background-color: #4caf50;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 20px;
+    }
+    .menu, .section {
+      display: none;
+      padding: 20px;
+    }
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+    }
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .back-button {
+      margin-top: 20px;
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    input, button, select, textarea {
+      margin: 10px 0;
+      padding: 8px;
+      width: 100%;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: #fff;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    li input[type="checkbox"] {
+      margin-left: 10px;
+    }
+    .total {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
 </head>
-<body><section class="hero">
-  <img src="https://via.placeholder.com/1200x300.png?text=وطندار" alt="ویترین">
-  <div class="hero-title">AFG M</div>
-</section><div class="container section-buttons">
-  <div class="button-card" style="background-color:#ffadad"><i class="fa-solid fa-ticket"></i><span>نوبت کد فیدا</span></div>
-  <div class="button-card" style="background-color:#ffd6a5"><i class="fa-solid fa-phone"></i><span>ارتباط با AFGM</span></div>
-  <div class="button-card" style="background-color:#fdffb6"><i class="fa-solid fa-search"></i><span>پیگیری درخواست</span></div>
-  <div class="button-card" style="background-color:#caffbf"><i class="fa-solid fa-id-card"></i><span>ثبت‌نام تذکره الکترونیکی</span></div>
-  <div class="button-card" style="background-color:#9bf6ff"><i class="fa-solid fa-user-check"></i><span>تثبیت هویت</span></div>
-  <div class="button-card" style="background-color:#a0c4ff"><i class="fa-solid fa-passport"></i><span>تمدید پاسپورت</span></div>
-  <div class="button-card" style="background-color:#bdb2ff"><i class="fa-solid fa-file-check"></i><span>تأیید اسناد</span></div>
-  <div class="button-card" style="background-color:#ffc6ff"><i class="fa-solid fa-passport"></i><span>پاسپورت خانواری</span></div>
-  <div class="button-card" style="background-color:#ffadad"><i class="fa-solid fa-gavel"></i><span>وکالت نامه</span></div>
-  <div class="button-card" style="background-color:#ffd6a5"><i class="fa-solid fa-baby"></i><span>گواهی تولد</span></div>
-  <div class="button-card" style="background-color:#fdffb6"><i class="fa-solid fa-scroll"></i><span>نکاه خط</span></div>
-  <div class="button-card" style="background-color:#caffbf"><i class="fa-solid fa-passport"></i><span>پاسپورت الکترونیکی</span></div>
-  <div class="button-card" style="background-color:#9bf6ff"><i class="fa-solid fa-id-card"></i><span>تأیید تذکره</span></div>
-  <div class="button-card" style="background-color:#a0c4ff"><i class="fa-solid fa-file-lines"></i><span>مفقودی مدارک</span></div>
-  <div class="button-card" style="background-color:#bdb2ff"><i class="fa-solid fa-file-circle-xmark"></i><span>تذکره غیابی</span></div>
-  <div class="button-card" style="width:150px; background-color:#ffc6ff"><i class="fa-solid fa-building-columns"></i><span>افتتاح حساب</span></div>
-  <div class="button-card" style="width:150px; background-color:#ffadad"><i class="fa-solid fa-sim-card"></i><span>سیمکارت</span></div>
-  <div class="button-card" style="width:150px; background-color:#ffd6a5"><i class="fa-solid fa-shield-heart"></i><span>بیمه</span></div>
-  <div class="button-card" style="width:150px; background-color:#fdffb6"><i class="fa-solid fa-chalkboard-teacher"></i><span>آموزش فنی حرفه‌ای</span></div>
-  <div class="button-card" style="width:150px; background-color:#caffbf"><i class="fa-solid fa-file-signature"></i><span>ترجمه رسمی</span></div>
-  <div class="button-card" style="width:150px; background-color:#9bf6ff"><i class="fa-solid fa-passport"></i><span>اقامت و ویزا</span></div>
-  <div class="button-card" style="background-color:#ffc6ff"><i class="fa-solid fa-gift"></i><span>سوغات افغانستان</span></div>
-  <div class="button-card" style="background-color:#ffadad"><i class="fa-solid fa-calendar-days"></i><span>تاریخ افغانستان</span></div>
-</div><div class="container telegram-bar">کانال تلگرام AFGM</div><div id="chatbot">
-  <span class="close-btn" onclick="document.getElementById('chatbot').style.display='none'">&times;</span>
-  <p>خوش آمدید به AFGM!<br>اینجا تمام کارهای مهاجرین انجام می‌شود.</p>
-</div><div id="bottom-nav">
-  <div class="nav-item"><i class="fa-solid fa-house"></i><span>خانه</span></div>
-  <div class="nav-item"><i class="fa-solid fa-search"></i><span>پیگیری درخواست</span></div>
-  <div class="nav-item"><i class="fa-solid fa-user"></i><span>حساب من</span></div>
-</div><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></
+<body>
+
+<header>دفترچه یادداشت من</header>
+
+<div id="mainMenu" class="menu">
+  <div class="card" onclick="openSection('birthdays')">تاریخ تولد رفقا</div>
+  <div class="card" onclick="openSection('shopping')">لیست خرید</div>
+  <div class="card" onclick="openSection('homework')">تکالیف دانشگاه</div>
+  <div class="card" onclick="openSection('lyrics')">متن آهنگ</div>
+  <div class="card" onclick="openSection('memories')">خاطرات عشقمون</div>
+  <div class="card" onclick="openSection('dailyGoals')">هدف‌های روزانه</div>
+  <div class="card" onclick="openSection('reminders')">یادآوری‌ها</div>
+  <div class="card" onclick="openSection('expenses')">هزینه‌های روزانه</div>
+  <div class="card" onclick="openSection('savings')">پس‌انداز</div>
+</div>
+
+<!-- بخش تاریخ تولد رفقا -->
+<div id="birthdays" class="section">
+  <h2>تاریخ تولد رفقا</h2>
+  <input type="text" id="friendName" placeholder="نام و نام خانوادگی">
+  <input type="date" id="friendBirthdate">
+  <button onclick="addBirthday()">افزودن</button>
+  <ul id="birthdayList"></ul>
+  <button class="back-button" onclick="goBack()">بازگشت</button>
+</div>
+
+<!-- بخش لیست خرید -->
+<div id="shopping" class="section">
+  <h2>لیست خرید</h2>
+  <input type="text" id="productName" placeholder="نام محصول">
+  <input type="number" id="productPrice" placeholder="قیمت (تومان)">
+  <button onclick="addShoppingItem()">افزودن</button>
+  <ul id="shoppingList"></ul>
+  <button class="back-button" onclick="goBack()">بازگشت</button>
+</div>
+
+<!-- بخش تکالیف دانشگاه -->
+<div id="homework" class="section">
+  <h2>تکالیف دانشگاه</h2>
+  <input type="text" id="homeworkTitle" placeholder="عنوان تکلیف">
+  <textarea id="homeworkDesc" placeholder="توضیح تکلیف" rows="3"></textarea>
+  <button onclick="addHomework()">افزودن</button>
+  <ul id="homeworkList"></ul>
+  <button class="back-button" onclick="goBack()">بازگشت</button>
+</div>
+
+<!-- بخش متن آهنگ -->
+<div id="lyrics" class="section">
+  <h2>متن آهنگ</h2>
+  <input type="text" id="lyricsInput" placeholder="بخشی از آهنگ">
+  <button onclick="addItem('lyricsInput','lyricsList')">افزودن</button>
+  <ul id="lyricsList"></ul>
+  <button class="back-button" onclick="goBack()">بازگشت</button>
+</div>
+
+<!-- بخش خاطرات عشقمون -->
+<div id="memories" class="section">
+  <h2>خاطرات عشقمون</h2>
+  <input type="text" id="memoriesInput" placeholder="یک خاطره شیرین">
+  <button onclick="addItem('memoriesInput','memoriesList')">افزودن</button>
+  <ul id="memoriesList"></ul>
+  <button class="back-button" onclick="goBack()">بازگشت</button>
+</div>
+
+<!-- بخش هدف‌های روزانه -->
+<div id="dailyGoals" class="section">
+  <h2>هدف‌های روزانه</h2>
+  <input type="text" id="goalInput" placeholder="هدف امروز">
+  <button onclick="addGoal()">افزودن</button>
+  <ul id="goalList"></ul>
+  <button class="back-button" onclick="goBack()">بازگشت</button>
+</div>
+
+<!-- بخش یادآوری‌ها -->
+<div id="reminders" class="section">
+  <h2>یادآوری‌ها</h2>
+  <input type="text" id="reminderInput" placeholder="یادآوری جدید">
+  <button onclick="addReminder()">افزودن</button>
+  <ul id="reminderList"></ul>
+  <button class="back-button" onclick="goBack()">بازگشت</button>
+</div>
+
+<!-- بخش هزینه‌های روزانه -->
+<div id="expenses" class="section">
+  <h2>هزینه‌های روزانه</h2>
+  <input type="date" id="expenseDate">
+  <input type="text" id="expenseTitle" placeholder="عنوان هزینه">
+  <input type="number" id="expenseAmount" placeholder="مبلغ (تومان)">
+  <button onclick="addExpense()">افزودن</button>
+  <ul id="expenseList"></ul>
+  <button class="back-button" onclick="goBack()">بازگشت</button>
+</div>
+
+<!-- بخش پس‌انداز -->
+<div id="savings" class="section">
+  <h2>پس‌انداز</h2>
+  <select id="savingType">
+    <option value="daily">روزانه</option>
+    <option value="weekly">هفتگی</option>
+    <option value="monthly">ماهانه</option>
+  </select>
+  <input type="number" id="savingAmount" placeholder="مبلغ پس‌انداز">
+  <input type="text" id="cardNumber" placeholder="شماره کارت">
+  <button onclick="addSaving()">افزودن</button>
+  <ul id="savingList"></ul>
+  <div class="total">جمع کل پس‌انداز: <span id="totalSavings">0</span> تومان</div>
+  <button class="back-button" onclick="goBack()">بازگشت</button>
+</div>
+
+<script>
+  // تابع باز کردن بخش‌های مختلف
+  function openSection(sectionId) {
+    document.getElementById('mainMenu').style.display = 'none';
+    document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
+    document.getElementById(sectionId).style.display = 'block';
+  }
+
+  // تابع بازگشت به منوی اصلی
+  function goBack() {
+    document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
+    document.getElementById('mainMenu').style.display = 'grid';
+  }
+
+  // افزودن تاریخ تولد
+  function addBirthday() {
+    const name = document.getElementById('friendName').value;
+    const birthdate = document.getElementById('friendBirthdate').value;
+    if (name && birthdate) {
+      const li = document.createElement('li');
+      li.textContent = `${name} - ${birthdate}`;
+      document.getElementById('birthdayList').appendChild(li);
+      document.getElementById('friendName').value = '';
+      document.getElementById('friendBirthdate').value = '';
+    }
+  }
+
+  // افزودن آیتم خرید
+  function addShoppingItem() {
+    const name = document.getElementById('productName').value;
+    const price = document.getElementById('productPrice').value;
+    if (name && price) {
+      const li = document.createElement('li');
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      li.textContent = `${name} | قیمت: ${price} تومان`;
+      li.appendChild(checkbox);
+      document.getElementById('shoppingList').appendChild(li);
+      document.getElementById('productName').value = '';
+      document.getElementById('productPrice').value = '';
+    }
+  }
+
+  // افزودن تکالیف دانشگاه
+  function addHomework() {
+    const title = document.getElementById('homeworkTitle').value;
+    const desc = document.getElementById('homeworkDesc').value;
+    if (title && desc) {
+      const li = document.createElement('li');
+      li.textContent = `${title}: ${desc}`;
+      document.getElementById('homeworkList').appendChild(li);
+      document.getElementById('homeworkTitle').value = '';
+      document.getElementById('homeworkDesc').value = '';
+    }
+  }
+
+  // افزودن آیتم به لیست
+  function addItem(inputId, listId) {
+    const input = document.getElementById(inputId).value;
+    if (input) {
+      const li = document.createElement('li');
+      li.textContent = input;
+      document.getElementById(listId).appendChild(li);
+      document.getElementById(inputId).value = '';
+    }
+  }
+
+  // افزودن هدف روزانه
+  function addGoal() {
+    const goal = document.getElementById('goalInput').value;
+    if (goal) {
+      const li = document.createElement('li');
+      li.textContent = goal;
+      document.getElementById('goalList').appendChild(li);
+      document.getElementById('goalInput').value = '';
+    }
+  }
+
+  // افزودن یادآوری
+  function addReminder() {
+    const reminder = document.getElementById('reminderInput').value;
+    if (reminder) {
+      const li = document.createElement('li');
+      li.textContent = reminder;
+      document.getElementById('reminderList').appendChild(li);
+      document.getElementById('reminderInput').value = '';
+    }
+  }
+
+  // افزودن هزینه روزانه
+  function addExpense() {
+    const date = document.getElementById('expenseDate').value;
+    const title = document.getElementById('expenseTitle').value;
+    const amount = document.getElementById('expenseAmount').value;
+    if (date && title && amount) {
+      const li = document.createElement('li');
+      li.textContent = `${date} - ${title}: ${amount} تومان`;
+      document.getElementById('expenseList').appendChild(li);
+      document.getElementById('expenseDate').value = '';
+      document.getElementById('expenseTitle').value = '';
+      document.getElementById('expenseAmount').value = '';
+    }
+  }
+
+  // افزودن پس‌انداز
+  function addSaving() {
+    const type = document.getElementById('savingType').value;
+    const amount = document.getElementById('savingAmount').value;
+    const cardNumber = document.getElementById('cardNumber').value;
+    if (amount && cardNumber) {
+      const li = document.createElement('li');
+      li.textContent = `${type}: ${amount} تومان`;
+      document.getElementById('savingList').appendChild(li);
+      document.getElementById('savingAmount').value = '';
+      document.getElementById('cardNumber').value = '';
+      
+      // محاسبه جمع کل پس‌انداز
+      let total = 0;
+      document.querySelectorAll('#savingList li').forEach(item => {
+        total += parseInt(item.textContent.split(":")[1]);
+      });
+      document.getElementById('totalSavings').textContent = total;
+    }
+  }
+</script>
+
+</body>
+  </html>
