@@ -3,10 +3,12 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-<meta name="theme-color" content="#0b0b12" />
+<meta name="theme-color" content="#08080e" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="mobile-web-app-capable" content="yes" />
 <title>خاطرات</title>
+<link rel="manifest" href="manifest.json" />
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
@@ -18,8 +20,9 @@
   --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
 }
 html,body{height:100%;overflow:hidden;overscroll-behavior:none;background:var(--bg);color:var(--text);
-  font-family:'Vazirmatn',sans-serif;user-select:none;-webkit-user-select:none;position:fixed;width:100%;}
-body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  font-family:'Vazirmatn',sans-serif;user-select:none;-webkit-user-select:none;position:fixed;width:100%;
+  transition:background .4s ease,color .4s ease;}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;transition:opacity .4s;
   background:
    radial-gradient(circle at 15% 10%,rgba(139,108,255,.22),transparent 45%),
    radial-gradient(circle at 85% 85%,rgba(212,175,55,.16),transparent 45%),
@@ -29,22 +32,54 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
 input,textarea,button{font-family:inherit;color:inherit;outline:none;border:none;background:none;}
 input,textarea{user-select:text;-webkit-user-select:text;}
 
-/* ===== Screens ===== */
+/* ===== LIGHT THEME ===== */
+body.light{--bg:#f4f1ea;--card:rgba(255,255,255,0.75);--card2:rgba(255,255,255,0.95);
+  --border:rgba(0,0,0,0.08);--text:#1a1a24;--muted:#6b6b80;
+  --gold:#b8860b;--gold2:#d4af37;--violet:#6a4cff;--violet2:#8b6cff;}
+body.light::before{
+  background:
+   radial-gradient(circle at 15% 10%,rgba(139,108,255,.15),transparent 45%),
+   radial-gradient(circle at 85% 85%,rgba(212,175,55,.18),transparent 45%),
+   radial-gradient(circle at 50% 50%,rgba(255,255,255,.6),transparent 70%),
+   var(--bg);}
+body.light .search,body.light .icon-btn,body.light .keypad button,
+body.light .mood-picker button,body.light .entry-date,body.light .action-btn,
+body.light .settings-card{background:rgba(255,255,255,.75);border-color:rgba(0,0,0,.08);}
+body.light .entry-card{background:linear-gradient(160deg,rgba(255,255,255,.95),rgba(255,255,255,.7));
+  box-shadow:0 4px 20px rgba(0,0,0,.06);border-color:rgba(0,0,0,.06);}
+body.light .entry-card .e-body{color:#5a5a70;}
+body.light #greeting,body.light #viewTitle,body.light .brand{
+  background:linear-gradient(135deg,#1a1a24,var(--violet));
+  -webkit-background-clip:text;background-clip:text;color:transparent;}
+body.light .bottom-bar{
+  background:linear-gradient(to top,rgba(244,241,234,.98),rgba(244,241,234,.5) 70%,transparent);}
+body.light .nav-item.active{color:#8a6d00;background:rgba(212,175,55,.18);}
+body.light .fab{color:#fff;}
+body.light .toast{background:rgba(255,255,255,.98);border-color:rgba(0,0,0,.1);color:#1a1a24;}
+body.light .modal{background:linear-gradient(160deg,#fff,#f0ede6);border-color:rgba(0,0,0,.08);}
+body.light .modal-btns button{background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.08);color:#1a1a24;}
+body.light .search::placeholder,body.light .entry-title::placeholder,
+body.light .entry-body::placeholder{color:rgba(0,0,0,.25);}
+body.light #ownerNameInput{background:rgba(0,0,0,.04);color:#1a1a24;border-color:rgba(0,0,0,.1);}
+body.light .section-label{color:#8a8a9a;}
+body.light .s-sub{color:#6b6b80;}
+body.light .footer-ver{color:#8a8a9a;}
+body.light #viewBody{color:#2a2a34;}
+
 .screen{position:fixed;inset:0;z-index:1;display:flex;flex-direction:column;
   opacity:0;pointer-events:none;transform:translateY(14px) scale(.99);
   transition:opacity .4s cubic-bezier(.22,1,.36,1),transform .4s cubic-bezier(.22,1,.36,1);}
 .screen.active{opacity:1;pointer-events:auto;transform:none;}
 
 /* ===== LOCK ===== */
-#lockScreen{align-items:center;justify-content:center;
+#lockScreen,#pinChangeScreen{align-items:center;justify-content:center;
   padding:calc(40px + var(--safe-top)) 24px calc(40px + var(--safe-bottom));}
 .lock-content{display:flex;flex-direction:column;align-items:center;width:100%;max-width:340px;}
 .logo{position:relative;width:90px;height:90px;margin-bottom:22px;display:flex;align-items:center;justify-content:center;}
 .logo-ring{position:absolute;inset:0;border-radius:50%;border:1.5px solid transparent;
   background:linear-gradient(135deg,var(--gold),var(--violet),var(--gold)) border-box;
   -webkit-mask:linear-gradient(#000 0 0) padding-box,linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor;mask-composite:exclude;
-  animation:spin 9s linear infinite;}
+  -webkit-mask-composite:xor;mask-composite:exclude;animation:spin 9s linear infinite;}
 .logo-core{width:44px;height:44px;border-radius:50%;
   background:linear-gradient(135deg,var(--gold2),var(--violet));
   box-shadow:0 0 32px rgba(212,175,55,.45),0 0 60px rgba(139,108,255,.3);
@@ -54,14 +89,13 @@ input,textarea{user-select:text;-webkit-user-select:text;}
   background:linear-gradient(135deg,var(--gold2),var(--violet2));
   -webkit-background-clip:text;background-clip:text;color:transparent;}
 .brand-sub{font-size:12.5px;color:var(--muted);margin:8px 0 30px;letter-spacing:.5px;text-align:center;}
-
 .pin-dots{display:flex;gap:15px;margin-bottom:34px;direction:ltr;}
 .pin-dots span{width:11px;height:11px;border-radius:50%;border:1.5px solid rgba(255,255,255,.25);transition:.25s;}
+body.light .pin-dots span{border-color:rgba(0,0,0,.2);}
 .pin-dots span.filled{background:linear-gradient(135deg,var(--gold2),var(--violet2));border-color:transparent;
   box-shadow:0 0 14px rgba(212,175,55,.65);transform:scale(1.15);}
 .pin-dots.error span{animation:shake .4s;border-color:var(--danger);}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-
 .keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;width:100%;max-width:270px;}
 .keypad button{aspect-ratio:1;border-radius:50%;border:1px solid var(--border);background:var(--card);
   color:var(--text);font-size:22px;font-weight:600;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
@@ -75,10 +109,11 @@ input,textarea{user-select:text;-webkit-user-select:text;}
 .app-header{padding:calc(18px + var(--safe-top)) 20px 14px;}
 .header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
 #greeting{font-size:23px;font-weight:700;letter-spacing:.5px;
-  background:linear-gradient(135deg,#fff,var(--violet2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  background:linear-gradient(135deg,#fff,var(--violet2));-webkit-background-clip:text;background-clip:text;color:transparent;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:75%;}
 .icon-btn{width:38px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--card);
   display:flex;align-items:center;justify-content:center;color:var(--text);font-size:16px;
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:.15s;}
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:.15s;flex-shrink:0;}
 .icon-btn:active{transform:scale(.92);background:var(--card2);}
 .search-wrap{position:relative;}
 .search{width:100%;padding:13px 18px;border-radius:16px;border:1px solid var(--border);background:var(--card);
@@ -87,7 +122,7 @@ input,textarea{user-select:text;-webkit-user-select:text;}
 .search:focus{border-color:rgba(212,175,55,.4);background:var(--card2);}
 
 /* ===== ENTRIES ===== */
-.entries{flex:1;overflow-y:auto;padding:6px 20px calc(140px + var(--safe-bottom));display:flex;flex-direction:column;gap:14px;}
+.entries{flex:1;overflow-y:auto;padding:6px 20px calc(160px + var(--safe-bottom));display:flex;flex-direction:column;gap:14px;}
 .entry-card{position:relative;padding:18px 18px 16px;border-radius:20px;border:1px solid var(--border);
   background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
   backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
@@ -126,13 +161,12 @@ input,textarea{user-select:text;-webkit-user-select:text;}
 .fab::after{content:"";position:absolute;inset:-6px;border-radius:50%;
   border:1px solid rgba(212,175,55,.35);animation:pulse 2.5s infinite;}
 @keyframes pulse{0%{opacity:.8;transform:scale(1)}100%{opacity:0;transform:scale(1.35)}}
-
 .bottom-bar{position:fixed;bottom:0;left:0;right:0;z-index:4;
-  padding:10px 20px calc(10px + var(--safe-bottom));
+  padding:10px 12px calc(10px + var(--safe-bottom));
   display:flex;justify-content:space-around;
   background:linear-gradient(to top,rgba(8,8,14,.98),rgba(8,8,14,.6) 70%,transparent);
-  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);}
-.nav-item{padding:8px 18px;border-radius:12px;font-size:12.5px;color:var(--muted);transition:.2s;}
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);transition:background .4s;}
+.nav-item{padding:8px 14px;border-radius:12px;font-size:12px;color:var(--muted);transition:.2s;}
 .nav-item.active{color:var(--gold2);background:rgba(212,175,55,.12);font-weight:600;}
 
 /* ===== EDITOR ===== */
@@ -149,6 +183,7 @@ input,textarea{user-select:text;-webkit-user-select:text;}
 .entry-date{padding:9px 14px;border-radius:12px;border:1px solid var(--border);background:var(--card);
   font-size:12.5px;color:var(--muted);}
 .entry-date::-webkit-calendar-picker-indicator{filter:invert(.6);}
+body.light .entry-date::-webkit-calendar-picker-indicator{filter:none;}
 .mood-picker{display:flex;gap:6px;flex-wrap:wrap;}
 .mood-picker button{width:36px;height:36px;border-radius:50%;font-size:18px;
   border:1px solid var(--border);background:var(--card);transition:.15s;
@@ -173,6 +208,45 @@ input,textarea{user-select:text;-webkit-user-select:text;}
 .action-btn:active{transform:scale(.96);background:var(--card2);}
 .action-btn.danger{color:var(--danger);border-color:rgba(255,92,114,.3);background:rgba(255,92,114,.08);}
 
+/* ===== SETTINGS ===== */
+.settings-body{flex:1;overflow-y:auto;padding:20px 20px calc(120px + var(--safe-bottom));}
+.settings-section{margin-bottom:22px;}
+.section-label{font-size:11.5px;font-weight:600;color:var(--muted);letter-spacing:1px;
+  margin:0 6px 10px;text-transform:uppercase;}
+.settings-card{border-radius:18px;border:1px solid var(--border);
+  background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);overflow:hidden;transition:.3s;}
+.settings-row{display:flex;align-items:center;justify-content:space-between;
+  padding:16px 18px;transition:.15s;cursor:pointer;}
+.settings-row:active{background:rgba(255,255,255,.05);}
+.settings-row + .settings-row{border-top:1px solid var(--border);}
+.settings-row.danger .s-title{color:var(--danger);}
+.s-info{flex:1;min-width:0;}
+.s-title{font-size:14px;font-weight:600;margin-bottom:3px;}
+.s-sub{font-size:11.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.s-btn{padding:7px 16px;border-radius:10px;font-size:12px;font-weight:600;
+  color:var(--gold2);border:1px solid rgba(212,175,55,.3);background:rgba(212,175,55,.08);
+  transition:.15s;flex-shrink:0;margin-right:10px;}
+.s-btn:active{transform:scale(.93);}
+.s-arrow{font-size:20px;color:var(--muted);margin-right:4px;font-weight:300;flex-shrink:0;}
+.settings-footer{text-align:center;padding:30px 0 10px;}
+.footer-brand{font-size:15px;font-weight:700;letter-spacing:2px;
+  background:linear-gradient(135deg,var(--gold2),var(--violet2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:4px;}
+.footer-ver{font-size:11px;color:var(--muted);}
+
+/* ===== THEME TOGGLE ===== */
+.theme-toggle{width:56px;height:30px;border-radius:15px;
+  background:rgba(255,255,255,.1);border:1px solid var(--border);
+  position:relative;cursor:pointer;transition:.3s;flex-shrink:0;margin-right:4px;}
+.theme-knob{position:absolute;top:2px;right:2px;width:24px;height:24px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold2),var(--gold));
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;transition:.35s cubic-bezier(.22,1,.36,1);
+  box-shadow:0 2px 8px rgba(0,0,0,.3);}
+body.light .theme-toggle{background:rgba(0,0,0,.08);}
+body.light .theme-knob{right:auto;left:2px;}
+
 /* ===== TOAST ===== */
 .toast{position:fixed;bottom:calc(180px + var(--safe-bottom));left:50%;transform:translateX(-50%) translateY(20px);
   padding:12px 22px;border-radius:14px;font-size:13px;font-weight:500;z-index:100;
@@ -183,7 +257,7 @@ input,textarea{user-select:text;-webkit-user-select:text;}
 .toast.err{border-color:rgba(255,92,114,.4);color:#ffb3bf;}
 .toast.ok{border-color:rgba(61,220,151,.4);color:#a8f5d4;}
 
-/* ===== MODAL CONFIRM ===== */
+/* ===== MODAL ===== */
 .modal-bg{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.65);backdrop-filter:blur(6px);
   display:none;align-items:center;justify-content:center;padding:30px;opacity:0;transition:.25s;}
 .modal-bg.show{display:flex;opacity:1;}
@@ -198,60 +272,53 @@ input,textarea{user-select:text;-webkit-user-select:text;}
   border:1px solid var(--border);background:var(--card);transition:.15s;}
 .modal-btns button:active{transform:scale(.95);}
 .modal-btns .confirm{background:linear-gradient(135deg,var(--danger),#cc3a50);color:#fff;border:none;}
+.modal-btns .confirm.gold{background:linear-gradient(135deg,var(--gold2),var(--gold));color:#1a1408;}
 </style>
 </head>
 <body>
 
-<!-- ===== LOCK ===== -->
+<!-- LOCK -->
 <div id="lockScreen" class="screen active">
   <div class="lock-content">
-    <div class="logo">
-      <div class="logo-ring"></div>
-      <div class="logo-core">🔒</div>
-    </div>
+    <div class="logo"><div class="logo-ring"></div><div class="logo-core">🔒</div></div>
     <h1 class="brand">خاطرات</h1>
     <p class="brand-sub" id="lockSub">رمز خود را وارد کنید</p>
-
     <div class="pin-dots" id="pinDots">
       <span></span><span></span><span></span><span></span>
       <span></span><span></span><span></span><span></span>
     </div>
-
     <div class="keypad" id="keypad"></div>
     <p class="lock-hint" id="lockHint"></p>
   </div>
 </div>
 
-<!-- ===== HOME ===== -->
+<!-- HOME -->
 <div id="homeScreen" class="screen">
   <header class="app-header">
     <div class="header-top">
       <h2 id="greeting">خاطرات من</h2>
-      <button class="icon-btn" id="logoutBtn" aria-label="قفل">🔒</button>
+      <button class="icon-btn" id="logoutBtn">🔒</button>
     </div>
     <div class="search-wrap">
       <input id="searchInput" class="search" type="text" placeholder="جستجو در خاطرات..." />
     </div>
   </header>
-
   <main class="entries" id="entriesList"></main>
-
   <div class="empty-state" id="emptyState">
     <div class="empty-ring"></div>
     <p>هنوز خاطره‌ای ثبت نکردی</p>
     <span>روی دکمه + بزن و اولین خاطره‌ات رو بنویس</span>
   </div>
-
   <button class="fab" id="addBtn">+</button>
-
   <nav class="bottom-bar">
     <button class="nav-item active" data-tab="all">همه</button>
     <button class="nav-item" data-tab="fav">محبوب</button>
     <button class="nav-item" data-tab="mood">حال‌وهوا</button>
+    <button class="nav-item" data-tab="settings">تنظیمات</button>
   </nav>
 </div>
 
-<!-- ===== EDITOR ===== -->
+<!-- EDITOR -->
 <div id="editorScreen" class="screen">
   <header class="editor-header">
     <button class="icon-btn" id="backBtn">✕</button>
@@ -275,7 +342,7 @@ input,textarea{user-select:text;-webkit-user-select:text;}
   </div>
 </div>
 
-<!-- ===== VIEW ===== -->
+<!-- VIEW -->
 <div id="viewScreen" class="screen">
   <header class="editor-header">
     <button class="icon-btn" id="viewBackBtn">←</button>
@@ -284,10 +351,7 @@ input,textarea{user-select:text;-webkit-user-select:text;}
   </header>
   <div class="view-body">
     <h2 id="viewTitle"></h2>
-    <div class="view-meta">
-      <span id="viewDate"></span>
-      <span id="viewMood"></span>
-    </div>
+    <div class="view-meta"><span id="viewDate"></span><span id="viewMood"></span></div>
     <p id="viewBody"></p>
   </div>
   <div class="view-actions">
@@ -296,7 +360,92 @@ input,textarea{user-select:text;-webkit-user-select:text;}
   </div>
 </div>
 
-<!-- ===== MODAL ===== -->
+<!-- SETTINGS -->
+<div id="settingsScreen" class="screen">
+  <header class="editor-header">
+    <button class="icon-btn" id="settingsBackBtn">←</button>
+    <span>تنظیمات</span>
+    <div style="width:38px;"></div>
+  </header>
+  <div class="settings-body">
+    <div class="settings-section">
+      <h4 class="section-label">پروفایل</h4>
+      <div class="settings-card">
+        <div class="settings-row" id="ownerRow">
+          <div class="s-info">
+            <div class="s-title">نام صاحب دفتر</div>
+            <div class="s-sub" id="ownerNameDisplay">تنظیم نشده</div>
+          </div>
+          <button class="s-btn" id="editOwnerBtn">ویرایش</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <h4 class="section-label">ظاهر</h4>
+      <div class="settings-card">
+        <div class="settings-row" id="themeRow">
+          <div class="s-info">
+            <div class="s-title">حالت نمایش</div>
+            <div class="s-sub" id="themeLabel">تاریک</div>
+          </div>
+          <div class="theme-toggle" id="themeToggle">
+            <div class="theme-knob">🌙</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <h4 class="section-label">امنیت</h4>
+      <div class="settings-card">
+        <div class="settings-row" id="changePinRow">
+          <div class="s-info">
+            <div class="s-title">تغییر رمز عبور</div>
+            <div class="s-sub">رمز ۸ رقمی جدید تنظیم کنید</div>
+          </div>
+          <span class="s-arrow">‹</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <h4 class="section-label">داده‌ها</h4>
+      <div class="settings-card">
+        <div class="settings-row danger" id="wipeRow">
+          <div class="s-info">
+            <div class="s-title">پاک کردن همه خاطرات</div>
+            <div class="s-sub">غیرقابل بازگشت</div>
+          </div>
+          <span class="s-arrow">‹</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-footer">
+      <div class="footer-brand">خاطرات</div>
+      <div class="footer-ver">نسخه ۱.۰ · رمزنگاری‌شده</div>
+    </div>
+  </div>
+</div>
+
+<!-- PIN CHANGE -->
+<div id="pinChangeScreen" class="screen">
+  <div class="lock-content">
+    <div class="logo"><div class="logo-ring"></div><div class="logo-core">🔑</div></div>
+    <h1 class="brand" style="font-size:20px;">تغییر رمز</h1>
+    <p class="brand-sub" id="pinChangeSub">رمز فعلی را وارد کنید</p>
+    <div class="pin-dots" id="pcDots">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <div class="keypad" id="pcKeypad"></div>
+    <p class="lock-hint" id="pcHint"></p>
+    <button class="s-btn" id="pcCancelBtn" style="margin-top:22px;padding:10px 24px;">انصراف</button>
+  </div>
+</div>
+
+<!-- MODAL CONFIRM -->
 <div class="modal-bg" id="modalBg">
   <div class="modal">
     <h3 id="modalTitle"></h3>
@@ -308,51 +457,76 @@ input,textarea{user-select:text;-webkit-user-select:text;}
   </div>
 </div>
 
+<!-- OWNER NAME MODAL -->
+<div class="modal-bg" id="ownerModalBg">
+  <div class="modal">
+    <h3>نام صاحب دفتر</h3>
+    <p>نامی که در بالای صفحه نمایش داده می‌شود</p>
+    <input id="ownerNameInput" type="text" maxlength="30"
+      style="width:100%;padding:13px 16px;border-radius:12px;border:1px solid var(--border);
+      background:var(--card);color:var(--text);font-size:14px;margin-bottom:20px;text-align:center;" />
+    <div class="modal-btns">
+      <button id="ownerCancel">انصراف</button>
+      <button id="ownerSave" class="confirm gold">ذخیره</button>
+    </div>
+  </div>
+</div>
+
 <div id="toast" class="toast"></div>
 
 <script>
-/* =========================================================
-   APP STATE
-========================================================= */
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 const PIN_LEN = 8;
 const MOODS = {happy:'😊',calm:'😌',sad:'😢',angry:'😡',love:'🥰',tired:'😴'};
 
 let pinBuffer = '';
-let pinStep = 'enter'; // enter | set | confirm
+let pinStep = 'enter';
 let tempPin = '';
 let cryptoKey = null;
 let entries = [];
-let filteredEntries = [];
 let currentTab = 'all';
 let currentEntryId = null;
 let searchQuery = '';
+let editingId = null;
+let selectedMood = null;
+let ownerName = localStorage.getItem('diary_owner_name') || '';
+let theme = localStorage.getItem('diary_theme') || 'dark';
 
-/* =========================================================
-   CRYPTO (Web Crypto API)
-========================================================= */
+/* ===== THEME ===== */
+function applyTheme(t){
+  theme = t;
+  if(t === 'light'){
+    document.body.classList.add('light');
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f4f1ea');
+    $('#themeLabel').textContent = 'روشن';
+    $('#themeToggle .theme-knob').textContent = '☀️';
+  } else {
+    document.body.classList.remove('light');
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#08080e');
+    $('#themeLabel').textContent = 'تاریک';
+    $('#themeToggle .theme-knob').textContent = '🌙';
+  }
+  localStorage.setItem('diary_theme', t);
+}
+
+/* ===== CRYPTO ===== */
 function b64(buf){return btoa(String.fromCharCode(...new Uint8Array(buf)));}
 function unb64(str){return Uint8Array.from(atob(str),c=>c.charCodeAt(0));}
-
 async function deriveKey(pin, salt){
   const enc = new TextEncoder();
   const baseKey = await crypto.subtle.importKey('raw', enc.encode(pin), 'PBKDF2', false, ['deriveKey']);
   return crypto.subtle.deriveKey(
     {name:'PBKDF2', salt, iterations:200000, hash:'SHA-256'},
-    baseKey,
-    {name:'AES-GCM', length:256},
-    false, ['encrypt','decrypt']
+    baseKey, {name:'AES-GCM', length:256}, false, ['encrypt','decrypt']
   );
 }
-
 async function encryptData(data, key){
   const iv = crypto.getRandomValues(new Uint8Array(12));
   const enc = new TextEncoder();
   const ct = await crypto.subtle.encrypt({name:'AES-GCM', iv}, key, enc.encode(JSON.stringify(data)));
   return { iv: b64(iv), data: b64(ct) };
 }
-
 async function decryptData(payload, key){
   const iv = unb64(payload.iv);
   const ct = unb64(payload.data);
@@ -360,15 +534,11 @@ async function decryptData(payload, key){
   return JSON.parse(new TextDecoder().decode(pt));
 }
 
-/* =========================================================
-   STORAGE
-========================================================= */
+/* ===== STORAGE ===== */
 const STORE_KEY = 'diary_vault_v1';
-
 function getVault(){ try { return JSON.parse(localStorage.getItem(STORE_KEY)); } catch { return null; } }
 function setVault(v){ localStorage.setItem(STORE_KEY, JSON.stringify(v)); }
 function hasVault(){ return !!getVault(); }
-
 async function saveEntries(){
   const vault = getVault();
   if(!vault || !cryptoKey) return;
@@ -376,264 +546,22 @@ async function saveEntries(){
   vault.payload = enc;
   setVault(vault);
 }
-
 async function loadEntries(){
   const vault = getVault();
-  if(!vault || !vault.payload) return;
-  try {
-    entries = await decryptData(vault.payload, cryptoKey);
-  } catch(e) {
-    entries = [];
-  }
+  if(!vault || !vault.payload){ entries = []; return; }
+  try { entries = await decryptData(vault.payload, cryptoKey); }
+  catch(e) { entries = []; throw e; }
 }
 
-/* =========================================================
-   LOCK SCREEN
-========================================================= */
-function initKeypad(){
-  const keys = ['1','2','3','4','5','6','7','8','9','','0','⌫'];
-  const kp = $('#keypad');
-  kp.innerHTML = '';
-  keys.forEach(k => {
-    const b = document.createElement('button');
-    if(k === '') { b.className = 'ghost'; b.style.visibility='hidden'; }
-    else if(k === '⌫') { b.className = 'ghost'; b.textContent = '⌫'; }
-    else b.textContent = k;
-    b.addEventListener('click', () => handleKey(k));
-    kp.appendChild(b);
-  });
+/* ===== TOAST/MODAL ===== */
+let toastTimer = null;
+function toast(msg, type=''){
+  const t = $('#toast');
+  t.textContent = msg;
+  t.className = 'toast show ' + type;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
 }
-
-function updateDots(){
-  $$('#pinDots span').forEach((s,i) => s.classList.toggle('filled', i < pinBuffer.length));
-}
-
-function handleKey(k){
-  if(k === '⌫'){ pinBuffer = pinBuffer.slice(0,-1); updateDots(); return; }
-  if(!/^\d$/.test(k)) return;
-  if(pinBuffer.length >= PIN_LEN) return;
-  pinBuffer += k;
-  updateDots();
-  if(pinBuffer.length === PIN_LEN) setTimeout(processPin, 150);
-}
-
-async function processPin(){
-  const pin = pinBuffer;
-  pinBuffer = '';
-  updateDots();
-
-  if(pinStep === 'set'){
-    tempPin = pin;
-    pinStep = 'confirm';
-    $('#lockSub').textContent = 'رمز را دوباره وارد کنید';
-    $('#lockHint').textContent = '';
-    return;
-  }
-
-  if(pinStep === 'confirm'){
-    if(pin !== tempPin){
-      showLockError('رمزها یکسان نیستند');
-      pinStep = 'set'; tempPin = '';
-      $('#lockSub').textContent = 'یک رمز ۸ رقمی بسازید';
-      return;
-    }
-    // create new vault
-    const salt = crypto.getRandomValues(new Uint8Array(16));
-    cryptoKey = await deriveKey(pin, salt);
-    entries = [];
-    setVault({ salt: b64(salt), payload: null });
-    await saveEntries();
-    showLockError('');
-    enterApp();
-    toast('رمز با موفقیت ساخته شد ✓', 'ok');
-    return;
-  }
-
-  // enter mode
-  const vault = getVault();
-  if(!vault) return;
-  try {
-    const salt = unb64(vault.salt);
-    cryptoKey = await deriveKey(pin, salt);
-    await loadEntries(); // throws if wrong
-    showLockError('');
-    enterApp();
-  } catch(e) {
-    showLockError('رمز اشتباه است');
-    pinDotsError();
-  }
-}
-
-function showLockError(msg){
-  const h = $('#lockHint');
-  h.textContent = msg;
-  h.classList.toggle('err', !!msg);
-}
-
-function pinDotsError(){
-  const d = $('#pinDots');
-  d.classList.add('error');
-  setTimeout(() => d.classList.remove('error'), 450);
-}
-
-function enterApp(){
-  $('#lockScreen').classList.remove('active');
-  $('#homeScreen').classList.add('active');
-  renderEntries();
-}
-
-function lockApp(){
-  cryptoKey = null;
-  entries = [];
-  pinBuffer = '';
-  updateDots();
-  if(!hasVault()){
-    pinStep = 'set';
-    $('#lockSub').textContent = 'یک رمز ۸ رقمی بسازید';
-  } else {
-    pinStep = 'enter';
-    $('#lockSub').textContent = 'رمز خود را وارد کنید';
-  }
-  showLockError('');
-  $('#homeScreen').classList.remove('active');
-  $('#editorScreen').classList.remove('active');
-  $('#viewScreen').classList.remove('active');
-  $('#lockScreen').classList.add('active');
-}
-
-/* =========================================================
-   RENDER ENTRIES
-========================================================= */
-function formatDate(d){
-  try {
-    const dt = new Date(d);
-    return dt.toLocaleDateString('fa-IR', {year:'numeric', month:'long', day:'numeric'});
-  } catch { return d; }
-}
-
-function renderEntries(){
-  const list = $('#entriesList');
-  const empty = $('#emptyState');
-  list.innerHTML = '';
-
-  let data = [...entries];
-
-  if(currentTab === 'fav') data = data.filter(e => e.fav);
-  else if(currentTab === 'mood') data = data.filter(e => e.mood);
-
-  if(searchQuery.trim()){
-    const q = searchQuery.trim().toLowerCase();
-    data = data.filter(e =>
-      (e.title||'').toLowerCase().includes(q) ||
-      (e.body||'').toLowerCase().includes(q)
-    );
-  }
-
-  data.sort((a,b) => new Date(b.date) - new Date(a.date));
-  filteredEntries = data;
-
-  if(data.length === 0){
-    empty.classList.add('show');
-    return;
-  }
-  empty.classList.remove('show');
-
-  data.forEach((e, i) => {
-    const card = document.createElement('div');
-    card.className = 'entry-card';
-    card.style.animationDelay = (i*40) + 'ms';
-    const preview = (e.body||'').replace(/\n/g,' ').slice(0,120);
-    card.innerHTML = `
-      <div class="e-top">
-        <div class="e-title">${escapeHtml(e.title || 'بدون عنوان')} ${e.fav ? '<span class="fav-mark">★</span>' : ''}</div>
-        <div class="e-mood">${MOODS[e.mood]||''}</div>
-      </div>
-      <div class="e-body">${escapeHtml(preview)}${(e.body||'').length>120?'...':''}</div>
-      <div class="e-date">📅 ${formatDate(e.date)}</div>
-    `;
-    card.addEventListener('click', () => openView(e.id));
-    list.appendChild(card);
-  });
-}
-
-function escapeHtml(s){
-  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-
-/* =========================================================
-   EDITOR
-========================================================= */
-let editingId = null;
-let selectedMood = null;
-
-function openEditor(entry=null){
-  editingId = entry ? entry.id : null;
-  selectedMood = entry ? entry.mood : null;
-
-  $('#editorTitle').textContent = entry ? 'ویرایش خاطره' : 'خاطره جدید';
-  $('#entryTitle').value = entry ? entry.title : '';
-  $('#entryDate').value = entry ? entry.date : new Date().toISOString().slice(0,10);
-  $('#entryBody').value = entry ? entry.body : '';
-  $$('#moodPicker button').forEach(b =>
-    b.classList.toggle('active', b.dataset.mood === selectedMood)
-  );
-
-  $('#homeScreen').classList.remove('active');
-  $('#editorScreen').classList.add('active');
-}
-
-async function saveEntry(){
-  const title = $('#entryTitle').value.trim();
-  const body = $('#entryBody').value.trim();
-  const date = $('#entryDate').value || new Date().toISOString().slice(0,10);
-
-  if(!title && !body){
-    toast('خاطره خالی است', 'err');
-    return;
-  }
-
-  if(editingId){
-    const e = entries.find(x => x.id === editingId);
-    if(e){ e.title = title; e.body = body; e.date = date; e.mood = selectedMood; }
-  } else {
-    entries.push({
-      id: crypto.randomUUID(),
-      title, body, date,
-      mood: selectedMood,
-      fav: false,
-      createdAt: Date.now()
-    });
-  }
-
-  await saveEntries();
-  toast('ذخیره شد ✓', 'ok');
-  $('#editorScreen').classList.remove('active');
-  $('#homeScreen').classList.add('active');
-  renderEntries();
-}
-
-/* =========================================================
-   VIEW
-========================================================= */
-function openView(id){
-  const e = entries.find(x => x.id === id);
-  if(!e) return;
-  currentEntryId = id;
-
-  $('#viewTitle').textContent = e.title || 'بدون عنوان';
-  $('#viewDate').textContent = formatDate(e.date);
-  $('#viewMood').textContent = MOODS[e.mood] || '';
-  $('#viewBody').textContent = e.body || '';
-  $('#viewFavBtn').textContent = e.fav ? '★' : '☆';
-  $('#viewFavBtn').style.color = e.fav ? 'var(--gold)' : '';
-
-  $('#homeScreen').classList.remove('active');
-  $('#viewScreen').classList.add('active');
-}
-
-/* =========================================================
-   MODAL
-========================================================= */
 let modalCallback = null;
 function openModal(title, text, cb){
   $('#modalTitle').textContent = title;
@@ -646,43 +574,302 @@ function closeModal(){
   modalCallback = null;
 }
 
-/* =========================================================
-   TOAST
-========================================================= */
-let toastTimer = null;
-function toast(msg, type=''){
-  const t = $('#toast');
-  t.textContent = msg;
-  t.className = 'toast show ' + type;
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+/* ===== LOCK ===== */
+function initKeypad(){
+  const keys = ['1','2','3','4','5','6','7','8','9','','0','⌫'];
+  const kp = $('#keypad');
+  kp.innerHTML = '';
+  keys.forEach(k => {
+    const b = document.createElement('button');
+    if(k === ''){ b.className='ghost'; b.style.visibility='hidden'; }
+    else if(k === '⌫'){ b.className='ghost'; b.textContent='⌫'; }
+    else b.textContent = k;
+    b.addEventListener('click', () => handleKey(k));
+    kp.appendChild(b);
+  });
+}
+function updateDots(){
+  $$('#pinDots span').forEach((s,i) => s.classList.toggle('filled', i < pinBuffer.length));
+}
+function handleKey(k){
+  if(k === '⌫'){ pinBuffer = pinBuffer.slice(0,-1); updateDots(); return; }
+  if(!/^\d$/.test(k)) return;
+  if(pinBuffer.length >= PIN_LEN) return;
+  pinBuffer += k;
+  updateDots();
+  if(pinBuffer.length === PIN_LEN) setTimeout(processPin, 150);
+}
+async function processPin(){
+  const pin = pinBuffer;
+  pinBuffer = '';
+  updateDots();
+  if(pinStep === 'set'){
+    tempPin = pin;
+    pinStep = 'confirm';
+    $('#lockSub').textContent = 'رمز را دوباره وارد کنید';
+    $('#lockHint').textContent = '';
+    return;
+  }
+  if(pinStep === 'confirm'){
+    if(pin !== tempPin){
+      showLockError('رمزها یکسان نیستند');
+      pinStep = 'set'; tempPin = '';
+      $('#lockSub').textContent = 'یک رمز ۸ رقمی بسازید';
+      pinDotsError(); return;
+    }
+    const salt = crypto.getRandomValues(new Uint8Array(16));
+    cryptoKey = await deriveKey(pin, salt);
+    entries = [];
+    setVault({ salt: b64(salt), payload: null });
+    await saveEntries();
+    showLockError('');
+    enterApp();
+    toast('رمز با موفقیت ساخته شد ✓', 'ok');
+    return;
+  }
+  const vault = getVault();
+  if(!vault) return;
+  try {
+    const salt = unb64(vault.salt);
+    cryptoKey = await deriveKey(pin, salt);
+    await loadEntries();
+    showLockError('');
+    enterApp();
+  } catch(e) {
+    showLockError('رمز اشتباه است');
+    pinDotsError();
+  }
+}
+function showLockError(msg){
+  const h = $('#lockHint');
+  h.textContent = msg;
+  h.classList.toggle('err', !!msg);
+}
+function pinDotsError(){
+  const d = $('#pinDots');
+  d.classList.add('error');
+  setTimeout(() => d.classList.remove('error'), 450);
+}
+function enterApp(){
+  updateOwnerDisplay();
+  $$('.screen').forEach(s => s.classList.remove('active'));
+  $('#homeScreen').classList.add('active');
+  currentTab = 'all';
+  $$('.nav-item').forEach(b => b.classList.toggle('active', b.dataset.tab === 'all'));
+  renderEntries();
+}
+function lockApp(){
+  cryptoKey = null;
+  entries = [];
+  pinBuffer = '';
+  updateDots();
+  pinStep = hasVault() ? 'enter' : 'set';
+  $('#lockSub').textContent = pinStep === 'set' ? 'یک رمز ۸ رقمی بسازید' : 'رمز خود را وارد کنید';
+  showLockError('');
+  $$('.screen').forEach(s => s.classList.remove('active'));
+  $('#lockScreen').classList.add('active');
 }
 
-/* =========================================================
-   EVENTS
-========================================================= */
-$('#logoutBtn').addEventListener('click', () => {
-  openModal('قفل اپلیکیشن', 'آیا می‌خواهید از اپ خارج شوید؟', () => {
-    closeModal();
-    lockApp();
+/* ===== RENDER ===== */
+function formatDate(d){
+  try { return new Date(d).toLocaleDateString('fa-IR', {year:'numeric', month:'long', day:'numeric'}); }
+  catch { return d; }
+}
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function renderEntries(){
+  const list = $('#entriesList');
+  const empty = $('#emptyState');
+  list.innerHTML = '';
+  let data = [...entries];
+  if(currentTab === 'fav') data = data.filter(e => e.fav);
+  else if(currentTab === 'mood') data = data.filter(e => e.mood);
+  if(searchQuery.trim()){
+    const q = searchQuery.trim().toLowerCase();
+    data = data.filter(e => (e.title||'').toLowerCase().includes(q) || (e.body||'').toLowerCase().includes(q));
+  }
+  data.sort((a,b) => new Date(b.date) - new Date(a.date));
+  if(data.length === 0){ empty.classList.add('show'); return; }
+  empty.classList.remove('show');
+  data.forEach((e, i) => {
+    const card = document.createElement('div');
+    card.className = 'entry-card';
+    card.style.animationDelay = (i*40) + 'ms';
+    const preview = (e.body||'').replace(/\n/g,' ').slice(0,120);
+    card.innerHTML = `
+      <div class="e-top">
+        <div class="e-title">${escapeHtml(e.title || 'بدون عنوان')} ${e.fav ? '<span class="fav-mark">★</span>' : ''}</div>
+        <div class="e-mood">${MOODS[e.mood]||''}</div>
+      </div>
+      <div class="e-body">${escapeHtml(preview)}${(e.body||'').length>120?'...':''}</div>
+      <div class="e-date">📅 ${formatDate(e.date)}</div>`;
+    card.addEventListener('click', () => openView(e.id));
+    list.appendChild(card);
   });
+}
+
+/* ===== EDITOR ===== */
+function openEditor(entry=null){
+  editingId = entry ? entry.id : null;
+  selectedMood = entry ? entry.mood : null;
+  $('#editorTitle').textContent = entry ? 'ویرایش خاطره' : 'خاطره جدید';
+  $('#entryTitle').value = entry ? entry.title : '';
+  $('#entryDate').value = entry ? entry.date : new Date().toISOString().slice(0,10);
+  $('#entryBody').value = entry ? entry.body : '';
+  $$('#moodPicker button').forEach(b => b.classList.toggle('active', b.dataset.mood === selectedMood));
+  $$('.screen').forEach(s => s.classList.remove('active'));
+  $('#editorScreen').classList.add('active');
+}
+async function saveEntry(){
+  const title = $('#entryTitle').value.trim();
+  const body = $('#entryBody').value.trim();
+  const date = $('#entryDate').value || new Date().toISOString().slice(0,10);
+  if(!title && !body){ toast('خاطره خالی است', 'err'); return; }
+  if(editingId){
+    const e = entries.find(x => x.id === editingId);
+    if(e){ e.title = title; e.body = body; e.date = date; e.mood = selectedMood; }
+  } else {
+    entries.push({ id: crypto.randomUUID(), title, body, date,
+      mood: selectedMood, fav: false, createdAt: Date.now() });
+  }
+  await saveEntries();
+  toast('ذخیره شد ✓', 'ok');
+  $$('.screen').forEach(s => s.classList.remove('active'));
+  $('#homeScreen').classList.add('active');
+  renderEntries();
+}
+
+/* ===== VIEW ===== */
+function openView(id){
+  const e = entries.find(x => x.id === id);
+  if(!e) return;
+  currentEntryId = id;
+  $('#viewTitle').textContent = e.title || 'بدون عنوان';
+  $('#viewDate').textContent = formatDate(e.date);
+  $('#viewMood').textContent = MOODS[e.mood] || '';
+  $('#viewBody').textContent = e.body || '';
+  $('#viewFavBtn').textContent = e.fav ? '★' : '☆';
+  $('#viewFavBtn').style.color = e.fav ? 'var(--gold)' : '';
+  $$('.screen').forEach(s => s.classList.remove('active'));
+  $('#viewScreen').classList.add('active');
+}
+
+/* ===== SETTINGS ===== */
+function updateOwnerDisplay(){
+  $('#ownerNameDisplay').textContent = ownerName || 'تنظیم نشده';
+  $('#greeting').textContent = ownerName ? `خاطرات ${ownerName}` : 'خاطرات من';
+}
+
+/* ===== PIN CHANGE ===== */
+let pcBuffer = '';
+let pcStep = 'current';
+let pcNewPin = '';
+function initPcKeypad(){
+  const keys = ['1','2','3','4','5','6','7','8','9','','0','⌫'];
+  const kp = $('#pcKeypad');
+  kp.innerHTML = '';
+  keys.forEach(k => {
+    const b = document.createElement('button');
+    if(k === ''){ b.className='ghost'; b.style.visibility='hidden'; }
+    else if(k === '⌫'){ b.className='ghost'; b.textContent='⌫'; }
+    else b.textContent = k;
+    b.addEventListener('click', () => pcHandleKey(k));
+    kp.appendChild(b);
+  });
+}
+function pcUpdateDots(){
+  $$('#pcDots span').forEach((s,i) => s.classList.toggle('filled', i < pcBuffer.length));
+}
+function pcDotsError(){
+  const d = $('#pcDots');
+  d.classList.add('error');
+  setTimeout(() => d.classList.remove('error'), 450);
+}
+async function pcHandleKey(k){
+  if(k === '⌫'){ pcBuffer = pcBuffer.slice(0,-1); pcUpdateDots(); return; }
+  if(!/^\d$/.test(k)) return;
+  if(pcBuffer.length >= PIN_LEN) return;
+  pcBuffer += k;
+  pcUpdateDots();
+  if(pcBuffer.length === PIN_LEN) setTimeout(pcProcess, 150);
+}
+async function pcProcess(){
+  const pin = pcBuffer;
+  pcBuffer = '';
+  pcUpdateDots();
+  if(pcStep === 'current'){
+    try {
+      const vault = getVault();
+      if(!vault) throw new Error();
+      const salt = unb64(vault.salt);
+      const testKey = await deriveKey(pin, salt);
+      if(vault.payload) await decryptData(vault.payload, testKey);
+      pcStep = 'new';
+      $('#pinChangeSub').textContent = 'رمز جدید را وارد کنید';
+      $('#pcHint').textContent = '';
+      $('#pcHint').classList.remove('err');
+    } catch(e) {
+      $('#pcHint').textContent = 'رمز فعلی اشتباه است';
+      $('#pcHint').classList.add('err');
+      pcDotsError();
+    }
+    return;
+  }
+  if(pcStep === 'new'){
+    pcNewPin = pin;
+    pcStep = 'confirm';
+    $('#pinChangeSub').textContent = 'رمز جدید را دوباره وارد کنید';
+    $('#pcHint').textContent = '';
+    return;
+  }
+  if(pcStep === 'confirm'){
+    if(pin !== pcNewPin){
+      $('#pcHint').textContent = 'رمزها یکسان نیستند';
+      $('#pcHint').classList.add('err');
+      pcDotsError();
+      pcStep = 'new'; pcNewPin = '';
+      $('#pinChangeSub').textContent = 'رمز جدید را وارد کنید';
+      return;
+    }
+    const newSalt = crypto.getRandomValues(new Uint8Array(16));
+    const newKey = await deriveKey(pin, newSalt);
+    const newPayload = await encryptData(entries, newKey);
+    setVault({ salt: b64(newSalt), payload: newPayload });
+    cryptoKey = newKey;
+    toast('رمز با موفقیت تغییر کرد ✓', 'ok');
+    closePinChange();
+  }
+}
+function openPinChange(){
+  pcBuffer=''; pcStep='current'; pcNewPin='';
+  pcUpdateDots();
+  $('#pinChangeSub').textContent = 'رمز فعلی را وارد کنید';
+  $('#pcHint').textContent = '';
+  $('#pcHint').classList.remove('err');
+  $$('.screen').forEach(s => s.classList.remove('active'));
+  $('#pinChangeScreen').classList.add('active');
+}
+function closePinChange(){
+  $$('.screen').forEach(s => s.classList.remove('active'));
+  $('#settingsScreen').classList.add('active');
+}
+
+/* ===== EVENTS ===== */
+$('#logoutBtn').addEventListener('click', () => {
+  openModal('قفل اپلیکیشن', 'آیا می‌خواهید از اپ خارج شوید؟', () => { closeModal(); lockApp(); });
 });
-
 $('#addBtn').addEventListener('click', () => openEditor());
-
 $('#backBtn').addEventListener('click', () => {
-  $('#editorScreen').classList.remove('active');
+  $$('.screen').forEach(s => s.classList.remove('active'));
   $('#homeScreen').classList.add('active');
 });
-
 $('#saveBtn').addEventListener('click', saveEntry);
-
 $('#viewBackBtn').addEventListener('click', () => {
-  $('#viewScreen').classList.remove('active');
+  $$('.screen').forEach(s => s.classList.remove('active'));
   $('#homeScreen').classList.add('active');
   renderEntries();
 });
-
 $('#viewFavBtn').addEventListener('click', async () => {
   const e = entries.find(x => x.id === currentEntryId);
   if(!e) return;
@@ -691,57 +878,97 @@ $('#viewFavBtn').addEventListener('click', async () => {
   $('#viewFavBtn').style.color = e.fav ? 'var(--gold)' : '';
   await saveEntries();
 });
-
 $('#editBtn').addEventListener('click', () => {
   const e = entries.find(x => x.id === currentEntryId);
   if(!e) return;
-  $('#viewScreen').classList.remove('active');
   openEditor(e);
 });
-
 $('#deleteBtn').addEventListener('click', () => {
   openModal('حذف خاطره', 'این خاطره برای همیشه حذف می‌شود. مطمئنید؟', async () => {
     closeModal();
     entries = entries.filter(x => x.id !== currentEntryId);
     await saveEntries();
-    $('#viewScreen').classList.remove('active');
+    $$('.screen').forEach(s => s.classList.remove('active'));
     $('#homeScreen').classList.add('active');
     renderEntries();
     toast('حذف شد', 'ok');
   });
 });
-
 $('#modalCancel').addEventListener('click', closeModal);
 $('#modalConfirm').addEventListener('click', () => { if(modalCallback) modalCallback(); });
-
-$('#searchInput').addEventListener('input', e => {
-  searchQuery = e.target.value;
-  renderEntries();
-});
+$('#searchInput').addEventListener('input', e => { searchQuery = e.target.value; renderEntries(); });
 
 $$('.nav-item').forEach(btn => {
   btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+    if(tab === 'settings'){
+      $$('.screen').forEach(s => s.classList.remove('active'));
+      $('#settingsScreen').classList.add('active');
+      updateOwnerDisplay();
+      $$('.nav-item').forEach(b => b.classList.remove('active'));
+      return;
+    }
     $$('.nav-item').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    currentTab = btn.dataset.tab;
+    currentTab = tab;
     renderEntries();
   });
 });
-
 $$('#moodPicker button').forEach(b => {
   b.addEventListener('click', () => {
     selectedMood = selectedMood === b.dataset.mood ? null : b.dataset.mood;
-    $$('#moodPicker button').forEach(x =>
-      x.classList.toggle('active', x.dataset.mood === selectedMood)
-    );
+    $$('#moodPicker button').forEach(x => x.classList.toggle('active', x.dataset.mood === selectedMood));
   });
 });
 
-/* keyboard support for desktop testing */
+/* SETTINGS EVENTS */
+$('#settingsBackBtn').addEventListener('click', () => {
+  $$('.screen').forEach(s => s.classList.remove('active'));
+  $('#homeScreen').classList.add('active');
+  $$('.nav-item').forEach(b => b.classList.toggle('active', b.dataset.tab === 'all'));
+  currentTab = 'all';
+  renderEntries();
+});
+$('#editOwnerBtn').addEventListener('click', (e) => {
+  e.stopPropagation();
+  $('#ownerNameInput').value = ownerName;
+  $('#ownerModalBg').classList.add('show');
+  setTimeout(() => $('#ownerNameInput').focus(), 100);
+});
+$('#ownerRow').addEventListener('click', () => $('#editOwnerBtn').click());
+$('#ownerCancel').addEventListener('click', () => $('#ownerModalBg').classList.remove('show'));
+$('#ownerSave').addEventListener('click', () => {
+  ownerName = $('#ownerNameInput').value.trim().slice(0,30);
+  localStorage.setItem('diary_owner_name', ownerName);
+  updateOwnerDisplay();
+  $('#ownerModalBg').classList.remove('show');
+  toast('نام ذخیره شد ✓', 'ok');
+});
+$('#themeRow').addEventListener('click', () => {
+  applyTheme(theme === 'dark' ? 'light' : 'dark');
+  toast(theme === 'light' ? 'حالت روشن ☀️' : 'حالت تاریک 🌙', 'ok');
+});
+$('#changePinRow').addEventListener('click', openPinChange);
+$('#pcCancelBtn').addEventListener('click', closePinChange);
+$('#wipeRow').addEventListener('click', () => {
+  openModal('پاک کردن همه', 'همه خاطرات برای همیشه حذف می‌شوند. مطمئنید؟', async () => {
+    closeModal();
+    entries = [];
+    await saveEntries();
+    toast('همه خاطرات پاک شد', 'ok');
+  });
+});
+
+/* KEYBOARD */
 document.addEventListener('keydown', e => {
   if($('#lockScreen').classList.contains('active')){
     if(/^\d$/.test(e.key)) handleKey(e.key);
     else if(e.key === 'Backspace') handleKey('⌫');
+    return;
+  }
+  if($('#pinChangeScreen').classList.contains('active')){
+    if(/^\d$/.test(e.key)) pcHandleKey(e.key);
+    else if(e.key === 'Backspace') pcHandleKey('⌫');
     return;
   }
   if($('#editorScreen').classList.contains('active') && e.key === 'Escape'){
@@ -749,19 +976,21 @@ document.addEventListener('keydown', e => {
   }
 });
 
-/* =========================================================
-   INIT
-========================================================= */
+/* ===== INIT ===== */
+applyTheme(theme);
 initKeypad();
 updateDots();
+initPcKeypad();
+updateOwnerDisplay();
+pinStep = hasVault() ? 'enter' : 'set';
+$('#lockSub').textContent = pinStep === 'set' ? 'یک رمز ۸ رقمی بسازید' : 'رمز خود را وارد کنید';
 
-if(!hasVault()){
-  pinStep = 'set';
-  $('#lockSub').textContent = 'یک رمز ۸ رقمی بسازید';
-} else {
-  pinStep = 'enter';
-  $('#lockSub').textContent = 'رمز خود را وارد کنید';
+/* ===== PWA ===== */
+if('serviceWorker' in navigator){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
 }
 </script>
 </body>
-</html>
+  </html>
